@@ -9,7 +9,7 @@
         :root {
             --grad-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --grad-2: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
-            --bg-color: #f0f4f8; 
+            --grad-3: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             --dark-footer: #1a1a1a;
         }
 
@@ -71,6 +71,7 @@
         }
         .bg-purple { background: var(--grad-1); }
         .bg-orange { background: var(--grad-2); }
+        .bg-green { background: var(--grad-3); }
 
         label { display: block; margin-bottom: 10px; font-weight: 600; color: #334155; }
         input {
@@ -98,6 +99,7 @@
         }
         .btn-purple { background: var(--grad-1); }
         .btn-orange { background: var(--grad-2); }
+        .btn-green { background: var(--grad-3); }
 
         .result {
             margin-top: 20px;
@@ -107,9 +109,11 @@
             display: none;
             text-align: center;
             line-height: 1.6;
+            word-break: break-all;
         }
         .res-purple { background: #e0e7ff; color: #3730a3; }
         .res-orange { background: #ffedd5; color: #9a3412; }
+        .res-green { background: #dcfce7; color: #166534; }
 
         footer { 
             background: var(--dark-footer); 
@@ -136,7 +140,7 @@
 
 <div class="container">
     <h1>Supercharge Your Workflow</h1>
-    <p class="tagline">The most colorful and accurate tools on the web.</p>
+    <p class="tagline">Accurate and premium tools for daily tasks.</p>
 
     <div class="tool-card">
         <div class="icon-box bg-purple">📅</div>
@@ -148,8 +152,17 @@
     </div>
 
     <div class="tool-card">
+        <div class="icon-box bg-green">🔐</div>
+        <h2 style="margin-bottom: 10px;">Safe Password Generator</h2>
+        <label>Password Length (8-20):</label>
+        <input type="number" id="passLength" value="12" min="8" max="20">
+        <button class="btn btn-green" onclick="genPass()">Generate Secure Password</button>
+        <div id="passRes" class="result res-green"></div>
+    </div>
+
+    <div class="tool-card">
         <div class="icon-box bg-orange">⚖️</div>
-        <h2 style="margin-bottom: 10px;">Unit Converter (Miles & KG)</h2>
+        <h2 style="margin-bottom: 10px;">Unit Converter</h2>
         <label>Enter Value (KM or KG):</label>
         <input type="number" id="unitInput" placeholder="e.g. 50">
         <div style="display: flex; gap: 10px;">
@@ -161,7 +174,7 @@
 </div>
 
 <footer>
-    &copy; 2026 ProTools Ultra
+    &copy; 2026 ProTools Ultra | All-in-one Utility Hub
 </footer>
 
 <script>
@@ -182,6 +195,18 @@
         }
         const out = document.getElementById('ageRes');
         out.innerHTML = `✨ Your age is:<br><strong>${years} Years, ${months} Months, and ${days} Days</strong>`;
+        out.style.display = "block";
+    }
+
+    function genPass() {
+        const len = document.getElementById('passLength').value;
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+        let retVal = "";
+        for (let i = 0; i < len; ++i) {
+            retVal += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        const out = document.getElementById('passRes');
+        out.innerHTML = `🛡️ Your Secure Password:<br><strong style='font-size:1.2rem'>${retVal}</strong>`;
         out.style.display = "block";
     }
 
